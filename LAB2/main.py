@@ -363,55 +363,117 @@ Extend the previous Python program to write the output to a file and perform ope
 input_numbers = input("Enter a series of space-separated integers: ")
 
 # Convert Input
+numbers_list = list(map(int, input_numbers.split()))
+numbers_tuple = tuple(numbers_list)
+numbers_set = set(numbers_list)
+numbers_dict = {x: x ** 2 for x in numbers_list}
 
 # Manipulate List
+numbers_list.append(10)
+numbers_list.insert(2, 20)
+numbers_list.remove(numbers_list[0])
 
 # Attempt to Modify Tuple (this will raise an error)
+try:
+    numbers_tuple.append(10)
+except AttributeError:
+    print("Tuples are immutable and cannot be modified.")
 
 # Set Operations
+set_2 = {10, 11, 12}
+set_union = numbers_set.union(set_2)
+set_intersection = numbers_set.intersection(set_2)
+set_difference = numbers_set.difference(set_2)
 
 # Dictionary Operations
+# Add a new key-value pair to the dictionary
+numbers_dict[11] = 121
+# Delete an existing key-value pair from the dictionary
+del numbers_dict[8]
 
 # Type Conversion
+list_to_tuple = tuple(numbers_list)
+list_to_set = set(numbers_list)
+list_to_dict = {x: x ** 2 for x in numbers_list}
+tuple_to_list = list(numbers_tuple)
+tuple_to_set = set(numbers_tuple)
+tuple_to_dict = {x: x ** 2 for x in numbers_tuple}
+set_to_list = list(numbers_set)
+set_to_tuple = tuple(numbers_set)
+set_to_dict = {x: x ** 2 for x in numbers_set}
+dict_to_list = list(numbers_dict.keys())
+dict_to_tuple = tuple(numbers_dict.keys())
+dict_to_set = set(numbers_dict.keys())
 
-student_number = input("Enter your student number: ")
+# Write Output to File
+with open("output.txt", "w") as f:
+    f.write("Student Number: " + student_number + "\n")
+    f.write("Original List: " + str(numbers_list) + "\n")
+    f.write("Original Tuple: " + str(numbers_tuple) + "\n")
+    f.write("Original Set: " + str(numbers_set) + "\n")
+    f.write("Original Dictionary: " + str(numbers_dict) + "\n")
+    f.write("Manipulated List: " + str(numbers_list) + "\n")
+    f.write("Manipulated Tuple: " + str(numbers_tuple) + "\n")
+    f.write("Union of Set: " + str(set_union) + "\n")
+    f.write("Intersection of Set: " + str(set_intersection) + "\n")
+    f.write("Difference of Set: " + str(set_difference) + "\n")
+    f.write("Updated Dictionary: " + str(numbers_dict) + "\n")
+    f.write("List to Tuple: " + str(list_to_tuple) + "\n")
+    f.write("List to Set: " + str(list_to_set) + "\n")
+    f.write("List to Dictionary: " + str(list_to_dict) + "\n")
+    f.write("Tuple to List: " + str(tuple_to_list) + "\n")
+    f.write("Tuple to Set: " + str(tuple_to_set) + "\n")
+    f.write("Tuple to Dictionary: " + str(tuple_to_dict) + "\n")
+    f.write("Set to List: " + str(set_to_list) + "\n")
+    f.write("Set to Tuple: " + str(set_to_tuple) + "\n")
+    f.write("Set to Dictionary: " + str(set_to_dict) + "\n")
+    f.write("Dictionary to List: " + str(dict_to_list) + "\n")
+    f.write("Dictionary to Tuple: " + str(dict_to_tuple) + "\n")
+    f.write("Dictionary to Set: " + str(dict_to_set) + "\n")
 
-# Write Output to File like this:
-    "Student Number: " + student_number
+# Read and Perform Operations on File
+with open("output.txt", "r") as f:
+    content = f.readlines()
 
-    "Original List: " + str(numbers_list)
-    "Original Tuple: " + str(numbers_tuple)
-    "Original Set: " + str(numbers_set)
-    "Original Dictionary: " + str(numbers_dict)
+# Count the number of lines
+num_lines = len(content)
 
-    "Manipulated List: " + str(numbers_list)
-    "Manipulated Tuple: " + str(numbers_tuple)
-    "Union of Set: " + str(set_union)
-    "Intersection of Set: " + str(set_intersection)
-    "Difference of Set: " + str(set_difference)
-    "Updated Dictionary: " + str(numbers_dict)
+# Find specific data
+specific_data = [line for line in content if "Modified list" in line]
 
-    "List to Tuple: " + str(list_to_tuple)
-    "List to Set: " + str(list_to_set)
-    "List to Dictionary: " + str(list_to_dict)
-    "Tuple to List: " + str(tuple_to_list)
-    "Tuple to Set: " + str(tuple_to_set)
-    "Tuple to Dictionary: " + str(tuple_to_dict)
-    "Set to List: " + str(set_to_list)
-    "Set to Tuple: " + str(set_to_tuple)
-    "Set to Dictionary: " + str(set_to_dict)
-    "Dictionary to List: " + str(dict_to_list)
-    "Dictionary to Tuple: " + str(dict_to_tuple)
-    "Dictionary to Set: " + str(dict_to_set)
+# Modify File Content (example: changing the second line)
+content[1] = "Modified list: [1, 2, 20, 9, 10]\n"
 
+# Write modified content back to the file
+with open("output.txt", "w") as f:
+    f.writelines(content)
+
+print("File operations completed.")
+
+""" Probably unstable DO NOT COMPILE"""
+
+"""
 # print "Content of the file:"
-
+print("Content of the file:")
+with open("output.txt", "r") as f:
+    print(f.read())
 # Perform Operations on File:
+with open("output.txt", "r") as f:
+    content = f.read()
+    num_lines = content.count('\n')
+import re
+num_integers = len(re.findall(r'\b\d+\b', content))
+all_integers = sum(map(int, re.findall(r'\b\d+\b', content)))
+modified_content = "Modified: " + content
+with open("output.txt", "w") as f:
+    f.write(modified_content)
+print(" File operations completed.")
+
 #   Count the number of lines in the file
 #   Count the number of integers in the file
 #   Add all integers in the file (sum).
 #   Modify the content of the file
-
+"""
 """--------------------------------------------------------------------------------
 **Control Statements:**
 Control statements are used in programming to alter the flow of execution based on certain conditions or criteria. In Python, commonly used control statements include:
@@ -469,7 +531,6 @@ These are fundamental constructs in Python programming that enable you to contro
 
   The program will generate the list of prime numbers up to 20, perform calculations, and write the results to 'prime_numbers.txt'.
 """
-
 
 
 """10.
