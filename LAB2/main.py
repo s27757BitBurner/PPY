@@ -29,12 +29,11 @@ Write a Python program that takes input from the user to create a list of intege
 
 # Input
 input_numbers = input("Enter a series of space-separated integers: ")
+# Convert Input
+numbers_list = list(map(int, input_numbers.split()))
 
-# Convert Input:
-
-
-# Sorting:
-
+# Sorting
+numbers_list.sort()
 
 # Print Output
 print("Sorted list:", numbers_list)
@@ -73,15 +72,19 @@ Extend the previous Python program to include tuples. Now, in addition to creati
 # Input
 input_numbers = input("Enter a series of space-separated integers: ")
 
-# Convert Input:
+# Convert Input
+numbers_list = list(map(int, input_numbers.split()))
+numbers_tuple = tuple(numbers_list)
 
+# Sorting
+numbers_list.sort()
 
-# Sorting:
-
+# Note: Tuples are immutable, so we convert the tuple to a list, sort it, and then convert it back to a tuple
+numbers_tuple = tuple(sorted(list(numbers_tuple)))
 
 # Print Output
 print("Sorted list:", numbers_list)
-print("Sorted tuple:", sorted_tuple)
+print("Sorted tuple:", numbers_tuple)
 
 """5.
 Extend the previous Python program to demonstrate the manipulation of lists using the append(), insert(), and remove() functions, and to emphasize the immutability of tuples.
@@ -110,31 +113,35 @@ Extend the previous Python program to demonstrate the manipulation of lists usin
 input_numbers = input("Enter a series of space-separated integers: ")
 
 # Convert Input
-
+numbers_list = list(map(int, input_numbers.split()))
+numbers_tuple = tuple(numbers_list)
 
 # Manipulate List
+numbers_list.append(10)
+numbers_list.insert(2, 20)
+numbers_list.remove(numbers_list[0])
+
 #   Append 10 to the list
 #   Insert 20 at index 2
 #   Remove one elementfrom the list
 
 # Attempt to Modify Tuple (this will raise an error)
 try:
-    #   Append 10 to the tuple
+    numbers_tuple.append(10)
 except AttributeError:
     print("Tuples are immutable and cannot be modified.")
 try:
-    #   Insert 20 at index 2
+    numbers_tuple.insert(2, 20)
 except AttributeError:
     pass  # Insert operation will also raise an error
 try:
-    #   Remove one element  from the tuple
+    numbers_tuple.remove(numbers_tuple[0])
 except AttributeError:
     pass  # Remove operation will also raise an error
 
 # Print Output
 print("Modified list:", numbers_list)
 print("Tuple remains unchanged:", numbers_tuple)
-
 """--------------------------------------------------------------------------------
 1. **Set**:
 A set in Python is a collection of unique elements that are unordered. This means that you cannot access elements by indices, and the elements are stored in an unordered manner. The main feature of a set is that each element in the set must be unique. Sets are useful when you want to perform set operations, such as mathematical set operations (e.g., union, difference, intersection).
@@ -194,36 +201,37 @@ Additionally, introduce sets and dictionaries and perform basic operations on th
 input_numbers = input("Enter a series of space-separated integers: ")
 
 # Convert Input
+numbers_list = list(map(int, input_numbers.split()))
+numbers_tuple = tuple(numbers_list)
+numbers_set = set(numbers_list)
 
 # Manipulate List
-# Append 10 to the list
-# Insert 20 at index 2
-# Remove the element 8
-
-# Attempt to Modify Tuple (this will raise an error)
-try:
-    # Append 10 to the tuple
-except AttributeError:
-    print("Tuples are immutable and cannot be modified.")
+numbers_list.append(10)
+numbers_list.insert(2, 20)
+numbers_list.remove(numbers_list[0])
 
 # Set Operations
-# Union
-# Intersection
-# Difference
+set_2 = {10, 11, 12}
+union_set = numbers_set.union(set_2)
+intersection_set = numbers_set.intersection(set_2)
+difference_set = numbers_set.difference(set_2)
 
-# Dictionary Operations
-print("Original Dictionary:", numbers_dict)
-# Add a new key-value pair
-# Delete an existing key-value pair
+# Dictionary
+original_dict = {x: x ** 2 for x in numbers_list}
+
+# Add a new key-value pair to the dictionary
+original_dict[11] = 121
+
+# Delete an existing key-value pair from the dictionary
+del original_dict[8]
 
 # Print Output
 print("Modified list:", numbers_list)
 print("Tuple remains unchanged:", numbers_tuple)
-print("Union of set:", set_union)
-print("Intersection of set:", set_intersection)
-print("Difference of set:", set_difference)
-print("Updated Dictionary:", numbers_dict)
-
+print("Union of set:", union_set)
+print("Intersection of set:", intersection_set)
+print("Difference of set:", difference_set)
+print("Updated Dictionary:", original_dict)
 """7. **Built-in Types and Type Conversion**
 
   Extend the previous Python program to demonstrate the use of built-in types and type conversion. Perform the following operations:
@@ -269,33 +277,51 @@ print("Updated Dictionary:", numbers_dict)
 input_numbers = input("Enter a series of space-separated integers: ")
 
 # Convert Input
+numbers_list = list(map(int, input_numbers.split()))
+numbers_tuple = tuple(numbers_list)
+numbers_set = set(numbers_list)
 
 # Manipulate List
-
-# Attempt to Modify Tuple (this will raise an error)
+numbers_list.append(10)
+numbers_list.insert(2, 20)
+numbers_list.remove(numbers_list[0])
 
 # Set Operations
+set_2 = {10, 11, 12}
+union_set = numbers_set.union(set_2)
+intersection_set = numbers_set.intersection(set_2)
+difference_set = numbers_set.difference(set_2)
 
-# Dictionary Operations
-print("Original Dictionary:", numbers_dict)
-# Add a new key-value pair
-# Delete an existing key-value pair
+# Dictionary
+original_dict = {x: x ** 2 for x in numbers_list}
+
+# Add a new key-value pair to the dictionary
+original_dict[11] = 121
+
+# Delete an existing key-value pair from the dictionary
+del original_dict[8]
 
 # Type Conversion
-# list_to_tuple =
-# list_to_set =
-# list_to_dict =
-# tuple_to_list =
-# tuple_to_set =
-# tuple_to_dict =
-# set_to_list =
-# set_to_tuple =
-# set_to_dict =
-# dict_to_list =
-# dict_to_tuple =
-# dict_to_set =
+list_to_tuple = tuple(numbers_list)
+list_to_set = set(numbers_list)
+list_to_dict = {x: x ** 2 for x in numbers_list}
+tuple_to_list = list(numbers_tuple)
+tuple_to_set = set(numbers_tuple)
+tuple_to_dict = {x: x ** 2 for x in numbers_tuple}
+set_to_list = list(numbers_set)
+set_to_tuple = tuple(numbers_set)
+set_to_dict = {x: x ** 2 for x in numbers_set}
+dict_to_list = list(original_dict.keys())
+dict_to_tuple = tuple(original_dict.keys())
+dict_to_set = set(original_dict.keys())
 
 # Print Output
+print("Modified list:", numbers_list)
+print("Tuple remains unchanged:", numbers_tuple)
+print("Union of set:", union_set)
+print("Intersection of set:", intersection_set)
+print("Difference of set:", difference_set)
+print("Updated Dictionary:", original_dict)
 print("List to Tuple:", list_to_tuple)
 print("List to Set:", list_to_set)
 print("List to Dictionary:", list_to_dict)
