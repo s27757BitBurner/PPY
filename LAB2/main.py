@@ -532,7 +532,41 @@ These are fundamental constructs in Python programming that enable you to contro
   The program will generate the list of prime numbers up to 20, perform calculations, and write the results to 'prime_numbers.txt'.
 """
 
+def is_prime(n):
+    if n <= 1:
+        return False
+    if n <= 3:
+        return True
+    if n % 2 == 0 or n % 3 == 0:
+        return False
+    i = 5
+    while i * i <= n:
+        if n % i == 0 or n % (i + 2) == 0:
+            return False
+        i += 6
+    return True
 
+try:
+    with open('output.txt', 'r') as file:
+        lines = file.readlines()
+        largest_integer = int(lines[-1].split(': ')[-1])
+
+    primes = [i for i in range(2, largest_integer+1) if is_prime(i)]
+    sum_of_primes = sum(primes)
+    largest_prime = max(primes)
+    smallest_prime = min(primes)
+
+    with open('prime_numbers.txt', 'w') as file:
+        file.write(f"List of prime numbers: {primes}\n")
+        file.write(f"Sum of prime numbers: {sum_of_primes}\n")
+        file.write(f"Largest prime number: {largest_prime}\n")
+        file.write(f"Smallest prime number: {smallest_prime}\n")
+        file.write(f"Is {largest_integer} a prime number? {'Yes' if is_prime(largest_integer) else 'No'}\n")
+
+except FileNotFoundError:
+    print("The file 'output.txt' does not exist.")
+except ValueError:
+    print("The file 'output.txt' does not contain an integer.")
 """10.
 In the final main.py file, leave the results from task 8 and 9, commit and push
 """
